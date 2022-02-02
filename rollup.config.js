@@ -14,7 +14,7 @@ const globals = {
 }
 
 const babelOptions = {
-  exclude: /node_modules/,
+  ignore: ['./node_modules'],
   runtimeHelpers: true,
 }
 
