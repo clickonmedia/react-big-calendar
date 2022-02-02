@@ -49,6 +49,7 @@
     "test": "yarn lint && jest",
     "tdd": "jest --watch",
     "release": "rollout",
+    "postinstall": "yarn build",
     "prepublishOnly": "yarn build",
     "prettier": "prettier '**/*js' !examples/bundle.js '!lib/**' --write ",
     "precommit": "lint-staged"
