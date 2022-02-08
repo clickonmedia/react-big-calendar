@@ -103,7 +103,7 @@ class Calendar extends React.Component {
 
     /**
      * The initial view set for the Calendar.
-     * @type Calendar.Views ('month'|'week'|'work_week'|'day'|'agenda')
+     * @type Calendar.Views ('month'|'week'|'two_week'|'work_week'|'day'|'agenda')
      * @default 'month'
      */
     defaultView: PropTypes.string,
@@ -296,7 +296,7 @@ class Calendar extends React.Component {
     /**
      *
      * ```js
-     * (dates: Date[] | { start: Date; end: Date }, view: 'month'|'week'|'work_week'|'day'|'agenda'|undefined) => void
+     * (dates: Date[] | { start: Date; end: Date }, view: 'month'|'week'|'two_week'|'work_week'|'day'|'agenda'|undefined) => void
      * ```
      *
      * Callback fired when the visible date range changes. Returns an Array of dates
@@ -427,7 +427,7 @@ class Calendar extends React.Component {
      * }
      * ```
      *
-     * @type Views ('month'|'week'|'work_week'|'day'|'agenda')
+     * @type Views ('month'|'week'|'two_week'|'work_week'|'day'|'agenda')
      * @View
      ['month', 'week', 'day', 'agenda']
      */
@@ -792,6 +792,7 @@ class Calendar extends React.Component {
      *   event: 'Event',
      *   allDay: 'All Day',
      *   week: 'Week',
+     *   two_week: 'Two Week',
      *   work_week: 'Work Week',
      *   day: 'Day',
      *   month: 'Month',
@@ -844,7 +845,7 @@ class Calendar extends React.Component {
     popup: false,
     toolbar: true,
     view: views.MONTH,
-    views: [views.MONTH, views.WEEK, views.DAY, views.AGENDA],
+    views: [views.MONTH, views.WEEK, views.TWO_WEEK, views.DAY, views.AGENDA],
     step: 30,
     length: 30,
 
@@ -996,6 +997,7 @@ class Calendar extends React.Component {
     current = current || getNow()
 
     let View = this.getView()
+
     const {
       accessors,
       components,
@@ -1054,7 +1056,7 @@ class Calendar extends React.Component {
    *
    * @param date
    * @param viewComponent
-   * @param {'month'|'week'|'work_week'|'day'|'agenda'} [view] - optional
+   * @param {'month'|'week'|'two_week'|'work_week'|'day'|'agenda'} [view] - optional
    * parameter. It appears when range change on view changing. It could be handy
    * when you need to have both: range and view type at once, i.e. for manage rbc
    * state via url
