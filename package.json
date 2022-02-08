@@ -39,6 +39,7 @@
     "build:css": "yarn sass && yarn autoprefixer",
     "assets": "cpy src/sass/* lib/sass && yarn assets-addons",
     "assets-addons": "cpy addons/**/*.scss ../lib/ --cwd=src --parents",
+    "build:dev": "BABEL_ENV=esm yarn rollup -c rollup.config.dev.js",
     "build:umd": "BABEL_ENV=esm yarn rollup -c",
     "build:cjs": "babel src --out-dir lib",
     "build": "yarn clean && yarn build:cjs && yarn build:umd && yarn assets && yarn build:css",
