@@ -12,4 +12,5 @@ export let views = {
   WORK_WEEK: 'work_week',
   DAY: 'day',
   AGENDA: 'agenda',
+  GANTT: 'gantt',
 }
