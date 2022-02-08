@@ -838,6 +838,27 @@ class Calendar extends React.Component {
      * or custom `Function(events, minimumStartDifference, slotMetrics, accessors)`
      */
     dayLayoutAlgorithm: DayLayoutAlgorithmPropType,
+
+    /**
+     * An array of category object, currently only used in the Gantt chart.
+     * Objects consist of:
+     *
+     *  - category id
+     *  - category name
+     *
+     * For example:
+     *
+     * ```js
+     * {
+     *   id: 3,
+     *   name: 'Category name' 
+     * }
+     * ```
+     */
+    categories: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired
+    })),
   }
 
   static defaultProps = {
@@ -865,6 +886,8 @@ class Calendar extends React.Component {
     longPressThreshold: 250,
     getNow: () => new Date(),
     dayLayoutAlgorithm: 'overlap',
+
+    categories: []
   }
 
   constructor(...args) {

@@ -21,7 +21,8 @@ export default function Resources(resources, accessors) {
       events.forEach(event => {
         const id = accessors.resource(event) || NONE
         let resourceEvents = eventsByResource.get(id) || []
-        resourceEvents.push(event)
+        // resourceEvents.push(event)
+        resourceEvents.unshift(event)
         eventsByResource.set(id, resourceEvents)
       })
       return eventsByResource

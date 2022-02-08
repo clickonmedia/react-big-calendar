@@ -1,7 +1,7 @@
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import scrollbarSize from 'dom-helpers/scrollbarSize'
-import React from 'react'
 
 import DateContentRow from './DateContentRow'
 import Header from './Header'
@@ -60,6 +60,75 @@ class TimeGridHeader extends React.Component {
     })
   }
 
+  renderGanttRows(resource, id) {
+    let {
+      width,
+      rtl,
+      resources,
+      range,
+      events,
+      getNow,
+      accessors,
+      selectable,
+      components,
+      getters,
+      scrollRef,
+      localizer,
+      isOverflowing,
+      components: {
+        timeGutterHeader: TimeGutterHeader,
+        resourceHeader: ResourceHeaderComponent = ResourceHeader,
+      },
+      resizable,
+      categories,
+    } = this.props
+
+    const categoryEvents = events.filter(item => item.category_id === 1)
+    const groupedEvents = resources.groupEvents(categoryEvents)
+
+    console.log('groupedEvents', groupedEvents)
+
+    let style = {}
+    if (isOverflowing) {
+      style[rtl ? 'marginLeft' : 'marginRight'] = `${scrollbarSize()}px`
+    }
+
+    return (
+      <Fragment>
+        { (categories || []).map( (cat, idx) => {
+            const categoryEvents = events.filter(item => item.category_id === cat.id)
+            const groupedEvents = resources.groupEvents(categoryEvents)
+
+            return (
+                <DateContentRow
+                    key={idx}
+                    isAllDay
+                    rtl={rtl}
+                    getNow={getNow}
+                    minRows={2}
+                    range={range}
+                    events={groupedEvents.get(id) || []}
+                    resourceId={resource && id}
+                    className="rbc-allday-cell"
+                    selectable={selectable}
+                    selected={this.props.selected}
+                    components={components}
+                    accessors={accessors}
+                    getters={getters}
+                    localizer={localizer}
+                    onSelect={this.props.onSelectEvent}
+                    onDoubleClick={this.props.onDoubleClickEvent}
+                    onKeyPress={this.props.onKeyPressEvent}
+                    onSelectSlot={this.props.onSelectSlot}
+                    longPressThreshold={this.props.longPressThreshold}
+                    resizable={resizable}
+                />
+            )
+        })}
+      </Fragment>
+    )
+  }
+
   render() {
     let {
       width,
@@ -80,14 +149,16 @@ class TimeGridHeader extends React.Component {
         resourceHeader: ResourceHeaderComponent = ResourceHeader,
       },
       resizable,
+      categories,
     } = this.props
 
     let style = {}
+
     if (isOverflowing) {
       style[rtl ? 'marginLeft' : 'marginRight'] = `${scrollbarSize()}px`
     }
 
-    const groupedEvents = resources.groupEvents(events)
+    console.log('TimeGridHeaderGantt', this.props)
 
     return (
       <div
@@ -120,30 +191,9 @@ class TimeGridHeader extends React.Component {
                 range.length <= 1 ? ' rbc-time-header-cell-single-day' : ''
               }`}
             >
-              {this.renderHeaderCells(range)}
+              {this.renderHeaderCells(events)}
             </div>
-            <DateContentRow
-              isAllDay
-              rtl={rtl}
-              getNow={getNow}
-              minRows={2}
-              range={range}
-              events={groupedEvents.get(id) || []}
-              resourceId={resource && id}
-              className="rbc-allday-cell"
-              selectable={selectable}
-              selected={this.props.selected}
-              components={components}
-              accessors={accessors}
-              getters={getters}
-              localizer={localizer}
-              onSelect={this.props.onSelectEvent}
-              onDoubleClick={this.props.onDoubleClickEvent}
-              onKeyPress={this.props.onKeyPressEvent}
-              onSelectSlot={this.props.onSelectSlot}
-              longPressThreshold={this.props.longPressThreshold}
-              resizable={resizable}
-            />
+            {this.renderGanttRows(resource, id)}
           </div>
         ))}
       </div>

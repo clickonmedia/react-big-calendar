@@ -9,7 +9,7 @@ import DayColumn from './DayColumn'
 import TimeGutter from './TimeGutter'
 
 import getWidth from 'dom-helpers/width'
-import TimeGridHeader from './TimeGridHeader'
+import TimeGridHeaderGantt from './TimeGridHeaderGantt'
 import { notify } from './utils/helpers'
 import { inRange, sortEvents } from './utils/eventLevels'
 import Resources from './utils/Resources'
@@ -123,6 +123,9 @@ export default class TimeGrid extends Component {
     const groupedEvents = resources.groupEvents(events)
     const groupedBackgroundEvents = resources.groupEvents(backgroundEvents)
 
+    console.log('groupedEvents', groupedEvents);
+    console.log('groupedBackgroundEvents', groupedBackgroundEvents);
+
     return resources.map(([id, resource], i) =>
       range.map((date, jj) => {
         let daysEvents = (groupedEvents.get(id) || []).filter(event =>
@@ -184,6 +187,7 @@ export default class TimeGrid extends Component {
       showMultiDayTimes,
       longPressThreshold,
       resizable,
+      categories,
     } = this.props
 
     width = width || this.state.gutterWidth
@@ -222,7 +226,8 @@ export default class TimeGrid extends Component {
 
     allDayEvents.sort((a, b) => sortEvents(a, b, accessors, localizer))
 
-    console.log('allDayEvents', allDayEvents);
+    console.log('allDayEvents', allDayEvents)
+    console.log('categories', categories);
 
     return (
       <div
@@ -231,7 +236,7 @@ export default class TimeGrid extends Component {
           resources && 'rbc-time-view-resources'
         )}
       >
-        <TimeGridHeader
+        <TimeGridHeaderGantt
           range={range}
           events={allDayEvents}
           width={width}
@@ -254,6 +259,7 @@ export default class TimeGrid extends Component {
           onDrillDown={this.props.onDrillDown}
           getDrilldownView={this.props.getDrilldownView}
           resizable={resizable}
+          categories={categories}
         />
         <div
           ref={this.contentRef}
@@ -380,6 +386,13 @@ TimeGrid.propTypes = {
   getDrilldownView: PropTypes.func.isRequired,
 
   dayLayoutAlgorithm: DayLayoutAlgorithmPropType,
+
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ),
 }
 
 TimeGrid.defaultProps = {

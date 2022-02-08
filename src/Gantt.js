@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Week from './Week'
-import TimeGrid from './TimeGrid'
+import TimeGridGantt from './TimeGridGantt'
 
 function ganttRange(date, { localizer }) {
   let firstOfWeek = localizer.startOfWeek()
@@ -18,7 +18,7 @@ class Gantt extends React.Component {
     /**
      * This allows us to default min, max, and scrollToTime
      * using our localizer. This is necessary until such time
-     * as TimeGrid is converted to a functional component.
+     * as TimeGridGantt is converted to a functional component.
      */
     let {
       date,
@@ -30,7 +30,7 @@ class Gantt extends React.Component {
     } = this.props
     let range = ganttRange(date, this.props)
     return (
-      <TimeGrid
+      <TimeGridGantt
         {...props}
         range={range}
         eventOffset={15}
@@ -51,7 +51,7 @@ Gantt.propTypes = {
   scrollToTime: PropTypes.instanceOf(Date),
 }
 
-Gantt.defaultProps = TimeGrid.defaultProps
+Gantt.defaultProps = TimeGridGantt.defaultProps
 
 Gantt.range = ganttRange
 

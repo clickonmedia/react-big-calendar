@@ -85,7 +85,7 @@ class MonthView extends React.Component {
         role="table"
         aria-label="Month View"
       >
-        <div className="rbc-row rbc-month-header month-view" role="row">
+        <div className="rbc-row rbc-month-header month-view-777" role="row">
           {this.renderHeaders(weeks[0])}
         </div>
         {weeks.map(this.renderWeek)}
