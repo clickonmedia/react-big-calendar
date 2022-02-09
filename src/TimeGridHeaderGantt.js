@@ -15,6 +15,9 @@ class TimeGridHeader extends React.Component {
   }
 
   renderHeaderCells(range) {
+
+    console.log('range', range);
+
     let {
       localizer,
       getDrilldownView,
@@ -35,6 +38,9 @@ class TimeGridHeader extends React.Component {
         <HeaderComponent date={date} label={label} localizer={localizer} />
       )
 
+      const isToday = localizer.isSameDate(date, today)
+
+
       return (
         <div
           key={i}
@@ -42,7 +48,7 @@ class TimeGridHeader extends React.Component {
           className={clsx(
             'rbc-header',
             className,
-            localizer.isSameDate(date, today) && 'rbc-today'
+            isToday && 'rbc-today'
           )}
         >
           {drilldownView ? (
@@ -55,6 +61,9 @@ class TimeGridHeader extends React.Component {
           ) : (
             <span>{header}</span>
           )}
+          { isToday &&
+            <div className="rbc-day-indicator"></div>
+          }
         </div>
       )
     })
@@ -85,8 +94,6 @@ class TimeGridHeader extends React.Component {
 
     const categoryEvents = events.filter(item => item.category_id === 1)
     const groupedEvents = resources.groupEvents(categoryEvents)
-
-    console.log('groupedEvents', groupedEvents)
 
     let style = {}
     if (isOverflowing) {
@@ -191,9 +198,9 @@ class TimeGridHeader extends React.Component {
                 range.length <= 1 ? ' rbc-time-header-cell-single-day' : ''
               }`}
             >
-              {this.renderHeaderCells(events)}
+              {this.renderHeaderCells(range)}
             </div>
-            {this.renderGanttRows(resource, id)}
+            { this.renderGanttRows(resource, id) }
           </div>
         ))}
       </div>

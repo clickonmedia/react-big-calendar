@@ -101,6 +101,17 @@
 
 .rbc-today {
   background-color: $today-highlight-bg;
+  position: relative;
+}
+
+.rbc-day-indicator {
+  background-color: $today-highlight-bg;
+  position: absolute;
+  width: 3px;
+  height: 100px;
+  background: black;
+  top: 0;
+  left: 50%;
 }
 
 @import './toolbar';
