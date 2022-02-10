@@ -1032,10 +1032,12 @@ class Calendar extends React.Component {
     let CalToolbar = components.toolbar || Toolbar
     const label = View.title(current, { localizer, length })
 
+    console.log('gantt view', view);
+
     return (
       <div
         {...elementProps}
-        className={clsx(className, 'rbc-calendar', props.rtl && 'rbc-rtl')}
+        className={clsx(className, 'rbc-calendar', props.rtl && 'rbc-rtl', view === 'gantt' && 'rbc-gantt-view')}
         style={style}
       >
         {toolbar && (

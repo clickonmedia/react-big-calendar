@@ -222,8 +222,6 @@ export default class TimeGrid extends Component {
 
     allDayEvents.sort((a, b) => sortEvents(a, b, accessors, localizer))
 
-    console.log('allDayEvents', allDayEvents);
-
     return (
       <div
         className={clsx(

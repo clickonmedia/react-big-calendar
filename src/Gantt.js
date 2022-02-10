@@ -6,9 +6,8 @@ import TimeGridGantt from './TimeGridGantt'
 
 function ganttRange(date, { localizer }) {
   let firstOfWeek = localizer.startOfWeek()
-
   let start = localizer.startOf(date, 'week', firstOfWeek)
-  let end = localizer.endOf(date, 'month', firstOfWeek)
+  let end = localizer.add(start, 2, 'week')
 
   return localizer.range(start, end)
 }

@@ -4,21 +4,10 @@ import React from 'react'
 import Week from './Week'
 import TimeGrid from './TimeGrid'
 
-/*
-function twoWeekRange(date, options) {
-return Week.range(date, options).filter(
-d => [6, 0].indexOf(d.getDay()) === -1
-)
-}
-*/
-
 function twoWeekRange(date, { localizer }) {
   let firstOfWeek = localizer.startOfWeek()
-  // let start = localizer.startOf(date, 'week', firstOfWeek)
-  // let end = localizer.endOf(date, 'week', firstOfWeek)
-
   let start = localizer.startOf(date, 'week', firstOfWeek)
-  let end = localizer.endOf(date, 'month', firstOfWeek)
+  let end = localizer.add(start, 2, 'week')
 
   return localizer.range(start, end)
 }

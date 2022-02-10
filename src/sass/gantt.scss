@@ -1,0 +1,55 @@
+@import './variables';
+
+.rbc-gantt-view {
+  .rbc-time-header-cell {
+    z-index: 100;
+  }
+
+  .rbc-row-content {
+    z-index: 200;
+  }
+
+  .rbc-time-content {
+    z-index: 300;
+  }
+
+  .rbc-header {
+    overflow: visible;
+    text-align: center;
+
+    a {
+      display: inline-block;
+
+      span {
+        height: 18px;
+        border: 1px solid transparent;
+        display: block;
+        line-height: 16px;
+        padding: 1px 10px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+    }
+
+    &.rbc-today {
+      a {
+        span {
+          border: 1px solid #5b4bfa;
+          border-radius: 4px;
+          color: white;
+          background: #5b4bfa;
+        }
+      }
+    }
+  }
+
+  .rbc-day-indicator {
+    background-color: $today-highlight-bg;
+    position: absolute;
+    width: 3px;
+    height: 1000vh;
+    background: #5b4bfa;
+    top: 30px;
+    left: 50%;
+  }
+}
