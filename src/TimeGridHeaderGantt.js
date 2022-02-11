@@ -15,9 +15,6 @@ class TimeGridHeader extends React.Component {
   }
 
   renderHeaderCells(range) {
-
-    console.log('range', range);
-
     let {
       localizer,
       getDrilldownView,

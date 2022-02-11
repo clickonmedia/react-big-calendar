@@ -22,7 +22,6 @@ export default class TimeGrid extends Component {
     this.state = { gutterWidth: undefined, isOverflowing: null }
 
     this.scrollRef = React.createRef()
-    this.contentRef = React.createRef()
     this._scrollRatio = null
   }
 
@@ -30,46 +29,10 @@ export default class TimeGrid extends Component {
     this.calculateScroll()
   }
 
-  componentDidMount() {
-    this.checkOverflow()
-
-    if (this.props.width == null) {
-      this.measureGutter()
-    }
-
-    this.applyScroll()
-
-    window.addEventListener('resize', this.handleResize)
-  }
-
   handleScroll = e => {
     if (this.scrollRef.current) {
       this.scrollRef.current.scrollLeft = e.target.scrollLeft
     }
-  }
-
-  handleResize = () => {
-    animationFrame.cancel(this.rafHandle)
-    this.rafHandle = animationFrame.request(this.checkOverflow)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
-
-    animationFrame.cancel(this.rafHandle)
-
-    if (this.measureGutterAnimationFrameRequest) {
-      window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.props.width == null) {
-      this.measureGutter()
-    }
-
-    this.applyScroll()
-    //this.checkOverflow()
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -81,10 +44,6 @@ export default class TimeGrid extends Component {
     ) {
       this.calculateScroll(nextProps)
     }
-  }
-
-  gutterRef = ref => {
-    this.gutter = ref && findDOMNode(ref)
   }
 
   handleSelectAlldayEvent = (...args) => {
@@ -261,31 +220,6 @@ export default class TimeGrid extends Component {
           resizable={resizable}
           categories={categories}
         />
-        <div
-          ref={this.contentRef}
-          className="rbc-time-content"
-          onScroll={this.handleScroll}
-        >
-          <TimeGutter
-            date={start}
-            ref={this.gutterRef}
-            localizer={localizer}
-            min={localizer.merge(start, min)}
-            max={localizer.merge(start, max)}
-            step={this.props.step}
-            getNow={this.props.getNow}
-            timeslots={this.props.timeslots}
-            components={components}
-            className="rbc-time-gutter"
-            getters={getters}
-          />
-          {this.renderEvents(
-            range,
-            rangeEvents,
-            rangeBackgroundEvents,
-            getNow()
-          )}
-        </div>
       </div>
     )
   }
@@ -295,30 +229,6 @@ export default class TimeGrid extends Component {
     this._pendingSelection = []
   }
 
-  measureGutter() {
-    if (this.measureGutterAnimationFrameRequest) {
-      window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
-    }
-    this.measureGutterAnimationFrameRequest = window.requestAnimationFrame(
-      () => {
-        const width = getWidth(this.gutter)
-
-        if (width && this.state.gutterWidth !== width) {
-          this.setState({ gutterWidth: width })
-        }
-      }
-    )
-  }
-
-  applyScroll() {
-    if (this._scrollRatio != null) {
-      const content = this.contentRef.current
-      content.scrollTop = content.scrollHeight * this._scrollRatio
-      // Only do this once
-      this._scrollRatio = null
-    }
-  }
-
   calculateScroll(props = this.props) {
     const { min, max, scrollToTime, localizer } = props
 
@@ -326,20 +236,6 @@ export default class TimeGrid extends Component {
     const totalMillis = localizer.diff(min, max, 'milliseconds')
 
     this._scrollRatio = diffMillis / totalMillis
-  }
-
-  checkOverflow = () => {
-    if (this._updatingOverflow) return
-
-    const content = this.contentRef.current
-    let isOverflowing = content.scrollHeight > content.clientHeight
-
-    if (this.state.isOverflowing !== isOverflowing) {
-      this._updatingOverflow = true
-      this.setState({ isOverflowing }, () => {
-        this._updatingOverflow = false
-      })
-    }
   }
 
   memoizedResources = memoize((resources, accessors) =>
