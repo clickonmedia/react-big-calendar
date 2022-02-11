@@ -82,9 +82,6 @@ export default class TimeGrid extends Component {
     const groupedEvents = resources.groupEvents(events)
     const groupedBackgroundEvents = resources.groupEvents(backgroundEvents)
 
-    console.log('groupedEvents', groupedEvents);
-    console.log('groupedBackgroundEvents', groupedBackgroundEvents);
-
     return resources.map(([id, resource], i) =>
       range.map((date, jj) => {
         let daysEvents = (groupedEvents.get(id) || []).filter(event =>
@@ -184,9 +181,6 @@ export default class TimeGrid extends Component {
     })
 
     allDayEvents.sort((a, b) => sortEvents(a, b, accessors, localizer))
-
-    console.log('allDayEvents', allDayEvents)
-    console.log('categories', categories);
 
     return (
       <div

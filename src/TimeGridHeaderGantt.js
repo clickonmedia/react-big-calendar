@@ -163,7 +163,7 @@ class TimeGridHeader extends React.Component {
       style[rtl ? 'marginLeft' : 'marginRight'] = `${scrollbarSize()}px`
     }
 
-    console.log('TimeGridHeaderGantt', this.props)
+    console.log('categories', categories)
 
     return (
       <div
