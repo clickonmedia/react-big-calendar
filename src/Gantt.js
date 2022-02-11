@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
 import Week from './Week'
 import TimeGridGantt from './TimeGridGantt'
+import { navigate } from './utils/constants'
 
 function ganttRange(date, { localizer }) {
   let firstOfWeek = localizer.startOfWeek()
@@ -54,7 +54,18 @@ Gantt.defaultProps = TimeGridGantt.defaultProps
 
 Gantt.range = ganttRange
 
-Gantt.navigate = Week.navigate
+Gantt.navigate = (date, action, { localizer }) => {
+  switch (action) {
+    case navigate.PREVIOUS:
+      return localizer.add(date, -1, 'day')
+
+    case navigate.NEXT:
+      return localizer.add(date, 1, 'day')
+
+    default:
+      return date
+  }
+}
 
 Gantt.title = (date, { localizer }) => {
   let [start, ...rest] = ganttRange(date, { localizer })

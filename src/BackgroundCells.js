@@ -48,6 +48,7 @@ class BackgroundCells extends React.Component {
         {range.map((date, index) => {
           let selected = selecting && index >= startIdx && index <= endIdx
           const { className, style } = getters.dayProp(date)
+          const isWeekend = ['Sat', 'Sun'].includes(localizer.format(date, 'weekdayFormat'));
 
           return (
             <Wrapper key={index} value={date} range={range}>
@@ -58,6 +59,7 @@ class BackgroundCells extends React.Component {
                   className,
                   selected && 'rbc-selected-cell',
                   localizer.isSameDate(date, current) && 'rbc-today',
+                  isWeekend && 'rbc-weekend',
                   currentDate &&
                     localizer.neq(currentDate, date, 'month') &&
                     'rbc-off-range-bg'

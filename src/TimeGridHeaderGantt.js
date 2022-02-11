@@ -39,7 +39,7 @@ class TimeGridHeader extends React.Component {
       )
 
       const isToday = localizer.isSameDate(date, today)
-
+      const isWeekend = ['Sat', 'Sun'].includes(localizer.format(date, 'weekdayFormat'));
 
       return (
         <div
@@ -48,7 +48,8 @@ class TimeGridHeader extends React.Component {
           className={clsx(
             'rbc-header',
             className,
-            isToday && 'rbc-today'
+            isToday && 'rbc-today',
+            isWeekend && 'rbc-weekend',
           )}
         >
           {drilldownView ? (
