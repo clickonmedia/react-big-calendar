@@ -36,6 +36,7 @@
     overflow: visible;
     text-align: center;
     border-bottom: 1px solid #e0e3ea;
+    padding: 0;
 
     a {
       display: inline-block;
@@ -45,7 +46,7 @@
         border: 1px solid transparent;
         display: block;
         line-height: 15px;
-        padding: 1px 10px;
+        padding: 1px 1px;
         font-size: 10px;
         font-weight: 600;
       }
@@ -84,5 +85,11 @@
         left: 50%;
       }
     }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .rbc-gantt-view .rbc-header a span {
+    padding: 1px 10px;
   }
 }
