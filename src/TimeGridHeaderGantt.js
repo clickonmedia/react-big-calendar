@@ -27,7 +27,7 @@ class TimeGridHeaderGantt extends React.Component {
 
     return (
       <Fragment>
-        <div className={'rbc-header'}>
+        <div className={'rbc-header'} style={{ flex: '300px '}}>
           <span>-</span>
         </div>
         {range.map((date, i) => {

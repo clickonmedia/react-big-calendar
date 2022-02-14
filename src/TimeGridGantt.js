@@ -280,7 +280,7 @@ TimeGrid.propTypes = {
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
     })
   ),
 }

@@ -86,6 +86,22 @@
       }
     }
   }
+
+  .rbc-header-category {
+    flex: 0 1 300px;
+  }
+
+  .rbc-allday-cell {
+    .rbc-row-bg {
+      width: calc(100% - 300px);
+      margin-left: 300px;
+    }
+
+    .rbc-row-content {
+      width: calc(100% - 300px);
+      margin-left: 300px;
+    }
+  }
 }
 
 @media screen and (min-width: 1200px) {
