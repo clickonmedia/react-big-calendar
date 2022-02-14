@@ -89,8 +89,6 @@ class TimeGridHeader extends React.Component {
 
     const groupedEvents = resources.groupEvents(events)
 
-    console.log('TimeGridHeader', this.props)
-
     return (
       <div
         style={style}

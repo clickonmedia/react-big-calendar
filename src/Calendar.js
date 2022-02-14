@@ -840,8 +840,8 @@ class Calendar extends React.Component {
     dayLayoutAlgorithm: DayLayoutAlgorithmPropType,
 
     /**
-     * An array of category object, currently only used in the Gantt chart.
-     * Objects consist of:
+     * An array of category objects, currently only used in the Gantt chart.
+     * Object attributes:
      *
      *  - category id
      *  - category name
@@ -849,10 +849,10 @@ class Calendar extends React.Component {
      * For example:
      *
      * ```js
-     * {
+     * [{
      *   id: 3,
-     *   name: 'Category name' 
-     * }
+     *   title: 'Category name' 
+     * }]
      * ```
      */
     categories: PropTypes.arrayOf(PropTypes.shape({
