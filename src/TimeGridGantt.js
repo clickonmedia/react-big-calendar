@@ -153,32 +153,7 @@ export default class TimeGrid extends Component {
 
     this.slots = range.length
 
-    let allDayEvents = [],
-      rangeEvents = [],
-      rangeBackgroundEvents = []
-
-    events.forEach(event => {
-      if (inRange(event, start, end, accessors, localizer)) {
-        let eStart = accessors.start(event),
-          eEnd = accessors.end(event)
-
-        if (
-          accessors.allDay(event) ||
-          localizer.startAndEndAreDateOnly(eStart, eEnd) ||
-          (!showMultiDayTimes && !localizer.isSameDate(eStart, eEnd))
-        ) {
-          allDayEvents.push(event)
-        } else {
-          rangeEvents.push(event)
-        }
-      }
-    })
-
-    backgroundEvents.forEach(event => {
-      if (inRange(event, start, end, accessors, localizer)) {
-        rangeBackgroundEvents.push(event)
-      }
-    })
+    let allDayEvents = events
 
     allDayEvents.sort((a, b) => sortEvents(a, b, accessors, localizer))
 
