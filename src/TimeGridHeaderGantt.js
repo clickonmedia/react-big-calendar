@@ -97,16 +97,10 @@ class TimeGridHeaderGantt extends React.Component {
       categories,
     } = this.props
 
-    // const categoryEvents = events.filter(item => item.category_id === 1)
-    // const groupedEvents = resources.groupEvents(categoryEvents)
-
     let style = {}
     if (isOverflowing) {
       style[rtl ? 'marginLeft' : 'marginRight'] = `${scrollbarSize()}px`
     }
-
-    console.log('categories', categories);
-    console.log('events', events);
 
     return (
       <Fragment>
@@ -115,12 +109,7 @@ class TimeGridHeaderGantt extends React.Component {
             item => item.category_id === category.id
           )
 
-          console.log('category.id', category.id);
-          console.log('categoryEvents', categoryEvents);
-
           const groupedEvents = resources.groupEvents(categoryEvents)
-
-          console.log('groupedEvents', groupedEvents);
 
           return (
             <DateContentRowGantt
