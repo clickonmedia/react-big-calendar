@@ -27,8 +27,8 @@ class TimeGridHeaderGantt extends React.Component {
 
     return (
       <Fragment>
-        <div className={'rbc-header'} style={{ flex: '300px '}}>
-          <span>-</span>
+        <div className={'rbc-header rbc-header-category'}>
+          <span></span>
         </div>
         {range.map((date, i) => {
           let drilldownView = getDrilldownView(date)
@@ -97,21 +97,30 @@ class TimeGridHeaderGantt extends React.Component {
       categories,
     } = this.props
 
-    const categoryEvents = events.filter(item => item.category_id === 1)
-    const groupedEvents = resources.groupEvents(categoryEvents)
+    // const categoryEvents = events.filter(item => item.category_id === 1)
+    // const groupedEvents = resources.groupEvents(categoryEvents)
 
     let style = {}
     if (isOverflowing) {
       style[rtl ? 'marginLeft' : 'marginRight'] = `${scrollbarSize()}px`
     }
 
+    console.log('categories', categories);
+    console.log('events', events);
+
     return (
       <Fragment>
-        {(categories || []).map((cat, idx) => {
+        {(categories || []).map((category, idx) => {
           const categoryEvents = events.filter(
-            item => item.category_id === cat.id
+            item => item.category_id === category.id
           )
+
+          console.log('category.id', category.id);
+          console.log('categoryEvents', categoryEvents);
+
           const groupedEvents = resources.groupEvents(categoryEvents)
+
+          console.log('groupedEvents', groupedEvents);
 
           return (
             <DateContentRowGantt
@@ -124,6 +133,7 @@ class TimeGridHeaderGantt extends React.Component {
               events={groupedEvents.get(id) || []}
               resourceId={resource && id}
               className="rbc-allday-cell"
+              categoryTitle={category.title}
               selectable={selectable}
               selected={this.props.selected}
               components={components}

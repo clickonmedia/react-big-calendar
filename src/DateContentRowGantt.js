@@ -125,6 +125,7 @@ class DateContentRow extends React.Component {
       isAllDay,
       resizable,
       showAllEvents,
+      categoryTitle
     } = this.props
 
     if (renderForMeasure) return this.renderDummy()
@@ -153,6 +154,11 @@ class DateContentRow extends React.Component {
 
     return (
       <div className={className} role="rowgroup">
+
+        { categoryTitle && 
+          <div className="rbc-row-category">{ categoryTitle }</div>
+        }
+
         <BackgroundCells
           localizer={localizer}
           date={date}
@@ -217,6 +223,7 @@ DateContentRow.propTypes = {
   selected: PropTypes.object,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
   longPressThreshold: PropTypes.number,
+  categoryTitle: PropTypes.string,
 
   onShowMore: PropTypes.func,
   showAllEvents: PropTypes.bool,
