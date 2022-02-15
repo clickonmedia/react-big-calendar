@@ -405,7 +405,7 @@ class Calendar extends React.Component {
      * accepts either an array of builtin view names,
      *
      * ```jsx
-     * views={['month', 'day', 'agenda']}
+     * views={['month', 'day', 'agenda', 'gantt']}
      * ```
      * or an object hash of the view name and the component (or boolean for builtin).
      *
@@ -429,7 +429,7 @@ class Calendar extends React.Component {
      *
      * @type Views ('month'|'week'|'gantt'|'work_week'|'day'|'agenda')
      * @View
-     ['month', 'week', 'day', 'agenda']
+     ['month', 'week', 'day', 'agenda', 'gantt']
      */
     views: componentViews,
 

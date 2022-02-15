@@ -13,7 +13,7 @@ export let dateRangeFormat = PropTypes.func
  * accepts either an array of builtin view names:
  *
  * ```
- * views={['month', 'day', 'agenda']}
+ * views={['month', 'day', 'agenda', 'gantt']}
  * ```
  *
  * or an object hash of the view name and the component (or boolean for builtin)
