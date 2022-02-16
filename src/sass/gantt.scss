@@ -1,6 +1,7 @@
 @import './variables';
 
 .rbc-gantt-view {
+  overflow: hidden;
 
   .rbc-time-header-cell {
     z-index: 100;
