@@ -1,7 +1,7 @@
 {
-  "name": "@clickonmedia/clickon-react-big-calendar",
-  "version": "1.0.1",
-  "description": "react-big-calendar, extended",
+  "name": "@clickonmedia/react-big-calendar",
+  "version": "1.0.2",
+  "description": "react-big-calendar, extended with a gantt chart",
   "author": "CLICKON",
   "repository": {
     "type": "git",
