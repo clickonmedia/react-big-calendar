@@ -1,6 +1,6 @@
 @import './variables';
 
-.rbc-gantt-view {
+.rbc-calendar.rbc-gantt-view {
   overflow: hidden;
 
   .rbc-time-header-cell {
@@ -132,7 +132,7 @@
 }
 
 @media screen and (min-width: 1240px) {
-  .rbc-gantt-view .rbc-header a span {
+  .rbc-calendar.rbc-gantt-view .rbc-header a span {
     padding: 1px 10px;
   }
 }
