@@ -1,14 +1,9 @@
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import * as animationFrame from 'dom-helpers/animationFrame'
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
 import memoize from 'memoize-one'
 
 import DayColumn from './DayColumn'
-import TimeGutter from './TimeGutter'
-
-import getWidth from 'dom-helpers/width'
 import TimeGridHeaderGantt from './TimeGridHeaderGantt'
 import { notify } from './utils/helpers'
 import { inRange, sortEvents } from './utils/eventLevels'
@@ -138,9 +133,6 @@ export default class TimeGrid extends Component {
       accessors,
       getters,
       localizer,
-      min,
-      max,
-      showMultiDayTimes,
       longPressThreshold,
       resizable,
       categories,
@@ -148,29 +140,17 @@ export default class TimeGrid extends Component {
 
     width = width || this.state.gutterWidth
 
-    let start = range[0],
-      end = range[range.length - 1]
+    let start = range[0];
+    let end = range[range.length - 1];
 
     this.slots = range.length
 
-    let allDayEvents = [],
-      rangeEvents = [],
-      rangeBackgroundEvents = []
+    let allDayEvents = [];
+    let rangeBackgroundEvents = [];
 
     events.forEach(event => {
       if (inRange(event, start, end, accessors, localizer)) {
-        let eStart = accessors.start(event),
-          eEnd = accessors.end(event)
-
-        if (
-          accessors.allDay(event) ||
-          localizer.startAndEndAreDateOnly(eStart, eEnd) ||
-          (!showMultiDayTimes && !localizer.isSameDate(eStart, eEnd))
-        ) {
-          allDayEvents.push(event)
-        } else {
-          rangeEvents.push(event)
-        }
+        allDayEvents.push(event)
       }
     })
 

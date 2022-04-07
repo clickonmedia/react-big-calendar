@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import Week from './Week'
 import TimeGridGantt from './TimeGridGantt'
 import { navigate } from './utils/constants'
 
